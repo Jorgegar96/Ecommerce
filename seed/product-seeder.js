@@ -1,0 +1,79 @@
+var Product = require('../models/product');
+
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/shopping', {
+useUnifiedTopology: true,
+useNewUrlParser: true,
+})
+.then(() => console.log('DB Connected!'))
+.catch(err => {
+console.log('DB Connection Error: ${err.message}');
+});
+
+var products = [
+	new Product({
+		imagePath: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u',
+		title: 'Dell Laptop XPS 13in',
+		description: 'Dell XPS 2019, 13 inch screen laptop with intel i9, 1TB HDD + 256GB SSD',
+		price: 1999.99
+	}),
+	new Product({
+		imagePath: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-11-pro-max-space-select-2019?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1566953858806',
+		title: 'iPhone 11 Pro',
+		description: 'iPhone 11 Pro, 64 GB',
+		price: 999.99
+	}),
+	new Product({
+		imagePath: 'https://images-na.ssl-images-amazon.com/images/I/51cOqbx5z3L.jpg',
+		title: 'Xbox One X',
+		description: 'Xbox One X Gold Rush Limited Edition, 1TB',
+		price: 599.99
+	}),
+	new Product({
+		imagePath: 'https://www.lenovo.com/medias/lenovo-laptop-yoga-730-13-front.png?context=bWFzdGVyfHJvb3R8MjM3OTB8aW1hZ2UvcG5nfGhmZi9oNTUvOTcwNTM0NTEyMjMzNC5wbmd8MzI4ODZkMjk0M2Y1ZDlmNTYyNmVlZGM3OTMxNmIwOWExZTc1MzVjYjU2ZWY4MjQ2NzdjYzM4NGI5MjE0ZmI3Mg',
+		title: 'Lenovo Yoga',
+		description: 'Lenovo Yoga 2019, 512 GB Solid State, Intel i9',
+		price: 1399.99
+	}),
+	new Product({
+		imagePath: 'https://olimpica.vteximg.com.br/arquivos/ids/179761-394-581/Consola---PS4--PRO--1TB.jpg?v=636790399833330000',
+		title: 'Play Station 4',
+		description: 'Play Station 4 500Gb Refurbished',
+		price: 259.99
+	}),
+	new Product({
+		imagePath: 'https://image-us.samsung.com/SamsungUS/home/televisions-and-home-theater/tvs/uhd-tv/ru7300/gallery/01_RU7300-L-Perspective-Black-031519.jpg?$product-details-jpg$',
+		title: 'UHD Samnsung TV',
+		description: 'New 4K UHD Samsung Curved Smart TV RU7300, 55 inches',
+		price: 999.99
+	}),
+	new Product({
+		imagePath: 'data:image/jpeg;base64,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',
+		title: 'Xbox One Controller',
+		description: 'Xbox One Elite Wireless Controller Series 2 w/ rechargable batteries',
+		price: 59.99
+	})
+]
+
+
+
+
+
+var done =0;
+for (var i=0; i < products.length; i++){
+	console.log(i);
+	products[i].save(function(err,result){
+			done++;
+			console.log(err);
+			console.log(done);
+			if(done===products.length){
+
+				exit();
+			}
+	});
+}
+
+function exit(){
+	mongoose.disconnect();
+}

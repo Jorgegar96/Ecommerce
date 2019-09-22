@@ -11,7 +11,14 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
-mongoose.connect('localhost:27017/shopping');
+mongoose.connect('mongodb://localhost:27017/shopping', {
+useUnifiedTopology: true,
+useNewUrlParser: true,
+})
+.then(() => console.log('DB Connected!'))
+.catch(err => {
+console.log('DB Connection Error: ${err.message}');
+} );
 
 // view engine setup
 app.engine('.hbs',expressHbs({defaultLayout: 'layout',extname: '.hbs'}));
