@@ -13,7 +13,7 @@ console.log('DB Connection Error: ${err.message}');
 
 var products = [
 	new Product({
-		imagePath: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u',
+		imagePath: 'https://static.bhphoto.com/images/images1500x1500/1558434050_1478956.jpg',
 		title: 'Dell Laptop XPS 13in',
 		description: 'Dell XPS 2019, 13 inch screen laptop with intel i9, 1TB HDD + 256GB SSD',
 		price: 1999.99
