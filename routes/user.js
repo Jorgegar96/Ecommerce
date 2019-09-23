@@ -10,19 +10,24 @@ router.get('/profile',isLoggedIn, function(req,res,next){
 	res.render('user/profile');
 });
 
+router.get('/logout',isLoggedIn,function(req,res,next){
+	req.logout();
+	res.redirect('/');
+});
+
 router.use('/',notLoggedIn,function(req,res,next){
 	next();
 });
 
 router.get('/signup', function(req,res,next){
 	var messages = req.flash('error');
-	res.render('/signup',{csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
+	res.render('user/signup',{csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
 });
 
 
 router.post('/signup', passport.authenticate('local.signup',{
-	successRedirect: '/profile',
-	failureRedirect: '/signup',
+	successRedirect: 'user/profile',
+	failureRedirect: 'user/signup',
 	failureFlash: true
 }));
 
@@ -37,10 +42,7 @@ router.post('/signin',passport.authenticate('local.signin',{
 	failureFlash: true
 }));
 
-router.get('logout',function(req,res,next){
-	req.logout();
-	res.redirect('/');
-});
+
 
 
 
